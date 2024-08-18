@@ -24,6 +24,9 @@ func huffmanString(input string) (string, int) {
 	return huffmanEncoded, MeasureSpace(huffmanEncoded)
 }
 
+func lzwString(input string) (string, int) {
+
+}
 
 func main() {
 	// Sample input and various test cases
