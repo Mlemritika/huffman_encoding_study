@@ -82,20 +82,6 @@ func main() {
 		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, hufSize))
     */
 
-		// BWT + MTF + RLE X2  + Huffman Encoding
-/*
-		start = time.Now()
-        bwtMtf = compression.MoveToFrontTransform(compression.BWTTransform(in))
-        bwtMtfRleRle := compression.RLECompress(compression.RLECompress(bwtMtf))
-        _, hufSize = huffmanString(bwtMtfRleRle)
-		TrackTime(start, "BWT + MTF + RLE X2 + Huffman Encoding")
-		fmt.Printf("BWT + MTF + RLE X2 + Huffman Encoding size: %d bits\n", hufSize)
-		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, hufSize))
-
-	    fmt.Println("*****************************************************")
-	    fmt.Println("*****************************************************")
-    */
-
 
 	}
 
