@@ -4,6 +4,7 @@ import (
     "fmt"
 )
 
+// chars to binary, size: * 8 basically.
 func SimpleEncode(input string) string {
 	encoded := ""
 	for _, char := range input {

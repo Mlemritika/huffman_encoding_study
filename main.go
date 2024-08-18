@@ -3,104 +3,107 @@ package main
 import (
 	"fmt"
 	"time"
+	"strings"
+	"math/rand"
+	"errors"
 )
 
+
+type HuffmanNode struct {}
+
+// Helper function to calculate compression ratio
+func CompressionRatio(originalSize, compressedSize int) float64 {
+	if originalSize == 0 {
+		return 0
+	}
+	return float64(compressedSize) / float64(originalSize)
+}
+
+// Error handling for invalid data
+func ValidateData(data string) error {
+	if len(data) == 0 {
+		return errors.New("input data is empty")
+	}
+	return nil
+}
+
+// Function to generate random test data
+func GenerateRandomString(length int) string {
+	const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	var result strings.Builder
+	for i := 0; i < length; i++ {
+		result.WriteByte(chars[rand.Intn(len(chars))])
+	}
+	return result.String()
+}
+
+func huffmanString(input string) (string, int) {
+	root := BuildHuffmanTree(input)
+	codes := make(map[rune]string)
+	GenerateCodes(root, "", codes)
+	huffmanEncoded := Encode(input, codes)
+	return huffmanEncoded, MeasureSpace(huffmanEncoded)
+}
+
+func bwtString(input string) (string, int) {
+	bwtEncoded := BWTTransform(input)
+	return bwtEncoded, MeasureSpace(bwtEncoded)
+}
+
+func rleString(input string) (string, int) {
+	rleEncoded := RLECompress(input)
+	return rleEncoded, MeasureSpace(rleEncoded)
+}
+
 func main() {
-	inputs := loadInputFromFile()
+	// Sample input and various test cases
+    inputs := loadInputFromFile()
 
 	fmt.Println("Performance and Space comparison for various inputs:")
 
-    // BWT + RLE + Huffman Encoding
-
-    //    BWT is:$: 1 bits                                                                                                                                
-    //    RLE is:1$: 2 bits                                                                                                                               
-    //    Huffman Encoding took 51.333µs                                                                                                                  
-    //    BWT + RLE Compressed + huffman is:01: 2 bits
-
-    start := time.Now()
-    bwt := BWTTransform("")
-    fmt.Printf("BWT is:%s: %d bits\n", bwt, MeasureSpace(bwt))
-    compressedRLE := RLECompress(bwt)
-    fmt.Printf("RLE is:%s: %d bits\n", compressedRLE, MeasureSpace(compressedRLE))
-    root := BuildHuffmanTree(compressedRLE)
-    codes := make(map[rune]string)
-    GenerateCodes(root, "", codes)
-    huffmanEncoded := Encode(compressedRLE, codes)
-    TrackTime(start, "Huffman Encoding")
-    huffmanSpace := MeasureSpace(huffmanEncoded)
-    fmt.Printf("BWT + RLE Compressed + huffman is:%s: %d bits\n",huffmanEncoded, huffmanSpace)
-    fmt.Printf("*****************************************************\n")
-    fmt.Printf("*****************************************************\n")
-    fmt.Printf("*****************************************************\n")
-    fmt.Printf("*****************************************************\n")
-    fmt.Printf("*****************************************************\n")
-    fmt.Printf("*****************************************************\n")
-
 	for _, in := range inputs {
-        fmt.Printf("\n\n\n#####################################################")
-        fmt.Println("\nInput:\n", in)
-        fmt.Printf(      "#####################################################\n\n")
+		fmt.Printf("\nTesting with input size: %d characters\n", len(in))
+        fmt.Printf("String:%s\n\n", in)
 
-
-		// BWT + RLE + Huffman Encoding
-        bwt := BWTTransform(in)
-        fmt.Printf("BWT: %d bits\n", MeasureSpace(bwt))
+		// Simple Encoding
 		start := time.Now()
-        compressedRLE := RLECompress(bwt)
-        fmt.Printf("RLE: %d bits\n", MeasureSpace(compressedRLE))
-		root := BuildHuffmanTree(compressedRLE)
-		codes := make(map[rune]string)
-		GenerateCodes(root, "", codes)
-		huffmanEncoded := Encode(compressedRLE, codes)
+		simpleEncoded := SimpleEncode(in)
+		simpleSize := MeasureSpace(simpleEncoded)
+		TrackTime(start, "Simple Encoding")
+		fmt.Printf("Simple Encoded size: %d bits\n", simpleSize)
+		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, simpleSize))
+
+		// Huffman Encoding
+		start = time.Now()
+		_, hufSize := huffmanString(in)
 		TrackTime(start, "Huffman Encoding")
-		huffmanSpace := MeasureSpace(huffmanEncoded)
-        fmt.Printf("BWT + RLE Compressed + huffman size: %d bits\n", huffmanSpace)
-		fmt.Printf("*****************************************************\n")
+		fmt.Printf("Huffman Encoded size: %d bits\n", hufSize)
+		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, hufSize))
+
+		// BWT + Huffman Encoding
+		start = time.Now()
+		_, bwtHufSize := huffmanString(BWTTransform(in))
+		TrackTime(start, "BWT + Huffman Encoding")
+		fmt.Printf("BWT + Huffman Encoded size: %d bits\n", bwtHufSize)
+		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, bwtHufSize))
 
 		// RLE + Huffman Encoding
 		start = time.Now()
-        compressedRLE = RLECompress(in)
-		root = BuildHuffmanTree(compressedRLE)
-		codes = make(map[rune]string)
-		GenerateCodes(root, "", codes)
-		huffmanEncoded = Encode(compressedRLE, codes)
-		TrackTime(start, "Huffman Encoding")
-		huffmanSpace = MeasureSpace(huffmanEncoded)
-        fmt.Printf("RLE Compressed + huffman size: %d bits\n", huffmanSpace)
-		fmt.Printf("*****************************************************\n")
+		_, rleHufSize := huffmanString(RLECompress(in))
+		TrackTime(start, "RLE + Huffman Encoding")
+		fmt.Printf("RLE + Huffman Encoded size: %d bits\n", rleHufSize)
+		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, rleHufSize))
 
-		// Classic Huffman Encoding
+		// BWT + RLE + Huffman Encoding
 		start = time.Now()
-		root = BuildHuffmanTree(in)
-		codes = make(map[rune]string)
-		GenerateCodes(root, "", codes)
-		huffmanEncoded = Encode(in, codes)
-		TrackTime(start, "Huffman Encoding")
-		huffmanSpace = MeasureSpace(huffmanEncoded)
-		fmt.Printf("Huffman Encoded Length: %d bits\n", huffmanSpace)
-		fmt.Printf("*****************************************************\n")
-
-		// Simple Encoding
-		start = time.Now()
-		simpleEncoded := SimpleEncode(in)
-		TrackTime(start, "Simple Encoding")
-		simpleSpace := MeasureSpace(simpleEncoded)
-		fmt.Printf("Simple Encoded Length: %d bits\n", simpleSpace)
-		fmt.Printf("Huffman Improvement Percentage: %.2f%%\n", getPercentage(huffmanSpace, simpleSpace))
-        fmt.Printf("*****************************************************\n")
-
-/* abandoned 
-
-		// FGK Encoding
-		fgkTree := NewFGKTree()
-		start = time.Now()
-		fgkEncoded := fgkTree.Encode(in)
-		TrackTime(start, "FGK Encoding")
-		fgkSpace := MeasureSpace(fgkEncoded)
-		fmt.Printf("FGK Encoded Length: %d bits\n", fgkSpace)
-		fmt.Printf("FGK Improvement Percentage: %.2f%%\n", getPercentage(fgkSpace, simpleSpace))
-		fmt.Printf("\n#####################################################\n")
-		fmt.Printf(  "#####################################################\n\n\n")
-        */
+		bwtRle := RLECompress(BWTTransform(in))
+		_, bwtRleHufSize := huffmanString(bwtRle)
+		TrackTime(start, "BWT + RLE + Huffman Encoding")
+		fmt.Printf("BWT + RLE + Huffman Encoded size: %d bits\n", bwtRleHufSize)
+		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, bwtRleHufSize))
+        fmt.Println("#####################################################")
+        fmt.Println("#####################################################")
 	}
+
+	fmt.Println("*****************************************************")
 }
