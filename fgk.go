@@ -49,10 +49,14 @@ func (tree *FGKTree) UpdateTree(character rune) {
 // incrementFrequency increments the frequency of the given node and updates the tree.
 func (tree *FGKTree) incrementFrequency(node *FGKNode) {
 	node.frequency++
+	
+	// Update the frequency of all ancestor nodes
 	for node.parent != nil {
 		node = node.parent
 		node.frequency++
 	}
+
+	// Now update the tree to maintain FGK properties
 	tree.updateTree()
 }
 
@@ -83,9 +87,21 @@ func (tree *FGKTree) Encode(input string) string {
 
 // getCodeForCharacter retrieves the Huffman code for a given character.
 func (tree *FGKTree) getCodeForCharacter(character rune) string {
-	// Retrieve the code for the character from the FGK tree
-	// Implementation details depend on how the FGK tree is structured
-	return "" // Placeholder
+	node, exists := tree.leafNodes[character]
+	if !exists {
+		return ""
+	}
+	
+	var code string
+	for node.parent != nil {
+		if node == node.parent.left {
+			code = "0" + code
+		} else {
+			code = "1" + code
+		}
+		node = node.parent
+	}
+	return code
 }
 
 // Decode decodes a string using the FGK tree.
