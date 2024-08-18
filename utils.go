@@ -12,6 +12,13 @@ func TrackTime(start time.Time, name string) {
 	fmt.Printf("%s took %s\n", name, elapsed)
 }
 
+func CompressionRatio(originalSize, compressedSize int) float64 {
+	if originalSize == 0 {
+		return 0
+	}
+	return float64(compressedSize) / float64(originalSize)
+}
+
 func MeasureSpace(encoded string) int {
 	return len(encoded)
 }
