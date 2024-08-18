@@ -3,32 +3,17 @@ package main
 import (
 	"fmt"
 	"time"
-	"strings"
-	"math/rand"
-	"errors"
-)
-
-import (
     "huffman_study/compression"
 )
 
-
-// Error handling for invalid data
-func ValidateData(data string) error {
-	if len(data) == 0 {
-		return errors.New("input data is empty")
-	}
-	return nil
+func bwtString(input string) (string, int) {
+    bwtEncoded := compression.BWTTransform(input)
+    return bwtEncoded, MeasureSpace(bwtEncoded)
 }
 
-// Function to generate random test data
-func GenerateRandomString(length int) string {
-	const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-	var result strings.Builder
-	for i := 0; i < length; i++ {
-		result.WriteByte(chars[rand.Intn(len(chars))])
-	}
-	return result.String()
+func rleString(input string) (string, int) {
+    rleEncoded := compression.RLECompress(input)
+    return rleEncoded, MeasureSpace(rleEncoded)
 }
 
 func huffmanString(input string) (string, int) {
@@ -39,15 +24,6 @@ func huffmanString(input string) (string, int) {
 	return huffmanEncoded, MeasureSpace(huffmanEncoded)
 }
 
-func bwtString(input string) (string, int) {
-	bwtEncoded := compression.BWTTransform(input)
-	return bwtEncoded, MeasureSpace(bwtEncoded)
-}
-
-func rleString(input string) (string, int) {
-	rleEncoded := compression.RLECompress(input)
-	return rleEncoded, MeasureSpace(rleEncoded)
-}
 
 func main() {
 	// Sample input and various test cases
