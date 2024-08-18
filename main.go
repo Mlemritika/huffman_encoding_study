@@ -28,15 +28,15 @@ func main() {
 		// Simple Encoding
 		start := time.Now()
 		simpleEncoded := compression.SimpleEncode(in)
+        TrackTime(start, "Simple Encoding")
 		simpleSize := MeasureSpace(simpleEncoded)
-		TrackTime(start, "Simple Encoding")
 		fmt.Printf("Simple Encoded size: %d bits\n", simpleSize)
 		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, simpleSize))
 
 		// Huffman Encoding
 		start = time.Now()
 		_, hufSize := huffmanString(in)
-		TrackTime(start, "Huffman Encoding")
+        TrackTime(start, "Huffman Encoding")
 		fmt.Printf("Huffman Encoded size: %d bits\n", hufSize)
 		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, hufSize))
 
