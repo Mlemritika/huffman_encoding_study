@@ -71,28 +71,28 @@ func main() {
 		simpleSize := MeasureSpace(simpleEncoded)
 		TrackTime(start, "Simple Encoding")
 		fmt.Printf("Simple Encoded size: %d bits\n", simpleSize)
-		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, simpleSize))
+		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, simpleSize))
 
 		// Huffman Encoding
 		start = time.Now()
 		_, hufSize := huffmanString(in)
 		TrackTime(start, "Huffman Encoding")
 		fmt.Printf("Huffman Encoded size: %d bits\n", hufSize)
-		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, hufSize))
+		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, hufSize))
 
 		// BWT + Huffman Encoding
 		start = time.Now()
 		_, bwtHufSize := huffmanString(BWTTransform(in))
 		TrackTime(start, "BWT + Huffman Encoding")
 		fmt.Printf("BWT + Huffman Encoded size: %d bits\n", bwtHufSize)
-		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, bwtHufSize))
+		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, bwtHufSize))
 
 		// RLE + Huffman Encoding
 		start = time.Now()
 		_, rleHufSize := huffmanString(RLECompress(in))
 		TrackTime(start, "RLE + Huffman Encoding")
 		fmt.Printf("RLE + Huffman Encoded size: %d bits\n", rleHufSize)
-		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, rleHufSize))
+		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, rleHufSize))
 
 		// BWT + RLE + Huffman Encoding
 		start = time.Now()
@@ -100,7 +100,7 @@ func main() {
 		_, bwtRleHufSize := huffmanString(bwtRle)
 		TrackTime(start, "BWT + RLE + Huffman Encoding")
 		fmt.Printf("BWT + RLE + Huffman Encoded size: %d bits\n", bwtRleHufSize)
-		fmt.Printf("Compression Ratio: %.2f\n\n", CompressionRatio(len(in)*8, bwtRleHufSize))
+		fmt.Printf("Compression Ratio: %.5f\n\n", CompressionRatio(len(in)*8, bwtRleHufSize))
         fmt.Println("#####################################################")
         fmt.Println("#####################################################")
 	}

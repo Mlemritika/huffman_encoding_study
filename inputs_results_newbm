@@ -1,27 +1,53 @@
 Performance and Space comparison for various inputs:
 
-Testing with input size: 7 characters
-String:aaaaaaa
+Testing with input size: 100 characters
+String:qqqqqqqqqqwwwwwwwwwweeeeeeeeeerrrrrrrrrrttttttttttyyyyyyyyyyuuuuuuuuuuiiiiiiiiiioooooooooopppppppppp
 
-Simple Encoding took 19.834µs
-Simple Encoded size: 56 bits
-Compression Ratio: 1.00
+Simple Encoding took 129.166µs
+Simple Encoded size: 800 bits
+Compression Ratio: 1.00000
 
-Huffman Encoding took 5.417µs
-Huffman Encoded size: 7 bits
-Compression Ratio: 0.12
+Huffman Encoding took 41.75µs
+Huffman Encoded size: 340 bits
+Compression Ratio: 0.42500
 
-BWT + Huffman Encoding took 4.667µs
-BWT + Huffman Encoded size: 8 bits
-Compression Ratio: 0.14
+BWT + Huffman Encoding took 58µs
+BWT + Huffman Encoded size: 354 bits
+Compression Ratio: 0.44250
 
-RLE + Huffman Encoding took 2.708µs
-RLE + Huffman Encoded size: 2 bits
-Compression Ratio: 0.04
+RLE + Huffman Encoding took 19.125µs
+RLE + Huffman Encoded size: 84 bits
+Compression Ratio: 0.10500
 
-BWT + RLE + Huffman Encoding took 5.5µs
-BWT + RLE + Huffman Encoded size: 8 bits
-Compression Ratio: 0.14
+BWT + RLE + Huffman Encoding took 51.958µs
+BWT + RLE + Huffman Encoded size: 135 bits
+Compression Ratio: 0.16875
+
+#####################################################
+#####################################################
+
+Testing with input size: 100 characters
+String:abababababababababababababababababababababababababababababababababababababababababababababababababab
+
+Simple Encoding took 50.041µs
+Simple Encoded size: 800 bits
+Compression Ratio: 1.00000
+
+Huffman Encoding took 14.125µs
+Huffman Encoded size: 100 bits
+Compression Ratio: 0.12500
+
+BWT + Huffman Encoding took 42.75µs
+BWT + Huffman Encoded size: 152 bits
+Compression Ratio: 0.19000
+
+RLE + Huffman Encoding took 49.417µs
+RLE + Huffman Encoded size: 300 bits
+Compression Ratio: 0.37500
+
+BWT + RLE + Huffman Encoding took 39.875µs
+BWT + RLE + Huffman Encoded size: 20 bits
+Compression Ratio: 0.02500
 
 #####################################################
 #####################################################
@@ -29,129 +55,51 @@ Compression Ratio: 0.14
 Testing with input size: 26 characters
 String:qwertyuiopasdfghjklzxcvbnm
 
-Simple Encoding took 19.375µs
+Simple Encoding took 8.083µs
 Simple Encoded size: 208 bits
-Compression Ratio: 1.00
+Compression Ratio: 1.00000
 
-Huffman Encoding took 33µs
+Huffman Encoding took 33.875µs
 Huffman Encoded size: 124 bits
-Compression Ratio: 0.60
+Compression Ratio: 0.59615
 
-BWT + Huffman Encoding took 41.041µs
+BWT + Huffman Encoding took 36.875µs
 BWT + Huffman Encoded size: 130 bits
-Compression Ratio: 0.62
+Compression Ratio: 0.62500
 
-RLE + Huffman Encoding took 32.584µs
+RLE + Huffman Encoding took 50.792µs
 RLE + Huffman Encoded size: 176 bits
-Compression Ratio: 0.85
+Compression Ratio: 0.84615
 
-BWT + RLE + Huffman Encoding took 37.459µs
+BWT + RLE + Huffman Encoding took 44µs
 BWT + RLE + Huffman Encoded size: 184 bits
-Compression Ratio: 0.88
+Compression Ratio: 0.88462
 
 #####################################################
 #####################################################
 
-Testing with input size: 17 characters
-String:aabbccccddddeeeee
+Testing with input size: 52 characters
+String:qqwweerrttyyuuiiooppaassddffgghhjjkkllzzxxccvvbbnnmm
 
-Simple Encoding took 4.542µs
-Simple Encoded size: 136 bits
-Compression Ratio: 1.00
+Simple Encoding took 25.25µs
+Simple Encoded size: 416 bits
+Compression Ratio: 1.00000
 
-Huffman Encoding took 5.959µs
-Huffman Encoded size: 38 bits
-Compression Ratio: 0.28
+Huffman Encoding took 42µs
+Huffman Encoded size: 248 bits
+Compression Ratio: 0.59615
 
-BWT + Huffman Encoding took 18.708µs
-BWT + Huffman Encoded size: 44 bits
-Compression Ratio: 0.32
+BWT + Huffman Encoding took 55.375µs
+BWT + Huffman Encoded size: 255 bits
+Compression Ratio: 0.61298
 
-RLE + Huffman Encoding took 7.333µs
-RLE + Huffman Encoded size: 30 bits
-Compression Ratio: 0.22
+RLE + Huffman Encoding took 54.333µs
+RLE + Huffman Encoded size: 176 bits
+Compression Ratio: 0.42308
 
-BWT + RLE + Huffman Encoding took 13.708µs
-BWT + RLE + Huffman Encoded size: 52 bits
-Compression Ratio: 0.38
-
-#####################################################
-#####################################################
-
-Testing with input size: 20 characters
-String:abababababababababab
-
-Simple Encoding took 5.083µs
-Simple Encoded size: 160 bits
-Compression Ratio: 1.00
-
-Huffman Encoding took 3.834µs
-Huffman Encoded size: 20 bits
-Compression Ratio: 0.12
-
-BWT + Huffman Encoding took 7.708µs
-BWT + Huffman Encoded size: 32 bits
-Compression Ratio: 0.20
-
-RLE + Huffman Encoding took 9.542µs
-RLE + Huffman Encoded size: 60 bits
-Compression Ratio: 0.38
-
-BWT + RLE + Huffman Encoding took 8.292µs
-BWT + RLE + Huffman Encoded size: 18 bits
-Compression Ratio: 0.11
-
-#####################################################
-#####################################################
-
-Testing with input size: 43 characters
-String:This is a test string for Huffman encoding!
-
-Simple Encoding took 22.792µs
-Simple Encoded size: 344 bits
-Compression Ratio: 1.00
-
-Huffman Encoding took 20.917µs
-Huffman Encoded size: 173 bits
-Compression Ratio: 0.50
-
-BWT + Huffman Encoding took 28.834µs
-BWT + Huffman Encoded size: 180 bits
-Compression Ratio: 0.52
-
-RLE + Huffman Encoding took 37.375µs
-RLE + Huffman Encoded size: 260 bits
-Compression Ratio: 0.76
-
-BWT + RLE + Huffman Encoding took 39.584µs
-BWT + RLE + Huffman Encoded size: 266 bits
-Compression Ratio: 0.77
-
-#####################################################
-#####################################################
-
-Testing with input size: 0 characters
-String:
-
-Simple Encoding took 42ns
-Simple Encoded size: 0 bits
-Compression Ratio: 0.00
-
-Huffman Encoding took 125ns
-Huffman Encoded size: 0 bits
-Compression Ratio: 0.00
-
-BWT + Huffman Encoding took 1.541µs
-BWT + Huffman Encoded size: 1 bits
-Compression Ratio: 0.00
-
-RLE + Huffman Encoding took 125ns
-RLE + Huffman Encoded size: 0 bits
-Compression Ratio: 0.00
-
-BWT + RLE + Huffman Encoding took 2.333µs
-BWT + RLE + Huffman Encoded size: 2 bits
-Compression Ratio: 0.00
+BWT + RLE + Huffman Encoding took 82.708µs
+BWT + RLE + Huffman Encoded size: 349 bits
+Compression Ratio: 0.83894
 
 #####################################################
 #####################################################
@@ -159,103 +107,51 @@ Compression Ratio: 0.00
 Testing with input size: 1 characters
 String:a
 
-Simple Encoding took 500ns
+Simple Encoding took 625ns
 Simple Encoded size: 8 bits
-Compression Ratio: 1.00
+Compression Ratio: 1.00000
 
-Huffman Encoding took 1.166µs
+Huffman Encoding took 1.5µs
 Huffman Encoded size: 1 bits
-Compression Ratio: 0.12
+Compression Ratio: 0.12500
 
-BWT + Huffman Encoding took 2.459µs
+BWT + Huffman Encoding took 2.834µs
 BWT + Huffman Encoded size: 2 bits
-Compression Ratio: 0.25
+Compression Ratio: 0.25000
 
-RLE + Huffman Encoding took 2.084µs
+RLE + Huffman Encoding took 2.959µs
 RLE + Huffman Encoded size: 2 bits
-Compression Ratio: 0.25
+Compression Ratio: 0.25000
 
-BWT + RLE + Huffman Encoding took 3.541µs
+BWT + RLE + Huffman Encoding took 4.417µs
 BWT + RLE + Huffman Encoded size: 6 bits
-Compression Ratio: 0.75
+Compression Ratio: 0.75000
 
 #####################################################
 #####################################################
 
-Testing with input size: 8 characters
-String:abababab
+Testing with input size: 99 characters
+String:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
-Simple Encoding took 2.166µs
-Simple Encoded size: 64 bits
-Compression Ratio: 1.00
+Simple Encoding took 45.625µs
+Simple Encoded size: 792 bits
+Compression Ratio: 1.00000
 
-Huffman Encoding took 2.375µs
-Huffman Encoded size: 8 bits
-Compression Ratio: 0.12
+Huffman Encoding took 22.083µs
+Huffman Encoded size: 99 bits
+Compression Ratio: 0.12500
 
-BWT + Huffman Encoding took 14.083µs
-BWT + Huffman Encoded size: 14 bits
-Compression Ratio: 0.22
+BWT + Huffman Encoding took 30.5µs
+BWT + Huffman Encoded size: 100 bits
+Compression Ratio: 0.12626
 
-RLE + Huffman Encoding took 5.542µs
-RLE + Huffman Encoded size: 24 bits
-Compression Ratio: 0.38
+RLE + Huffman Encoding took 2.875µs
+RLE + Huffman Encoded size: 3 bits
+Compression Ratio: 0.00379
 
-BWT + RLE + Huffman Encoding took 6.166µs
-BWT + RLE + Huffman Encoded size: 14 bits
-Compression Ratio: 0.22
-
-#####################################################
-#####################################################
-
-Testing with input size: 42 characters
-String:123123131213131312313131312312313131312313
-
-Simple Encoding took 10.583µs
-Simple Encoded size: 336 bits
-Compression Ratio: 1.00
-
-Huffman Encoding took 8.292µs
-Huffman Encoded size: 66 bits
-Compression Ratio: 0.20
-
-BWT + Huffman Encoding took 18.584µs
-BWT + Huffman Encoded size: 76 bits
-Compression Ratio: 0.23
-
-RLE + Huffman Encoding took 17.458µs
-RLE + Huffman Encoded size: 108 bits
-Compression Ratio: 0.32
-
-BWT + RLE + Huffman Encoding took 15.291µs
-BWT + RLE + Huffman Encoded size: 45 bits
-Compression Ratio: 0.13
-
-#####################################################
-#####################################################
-
-Testing with input size: 168 characters
-String:aaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbabaaaaaaaaaaaaaaabbbbbbbssssssssssssssssssssssssssssbbbbbbbbbbbbbbbbccccccccccbbbbbbbwwwwwwwwwwwwwwkkkkkkkkkkkkkkkk
-
-Simple Encoding took 90.042µs
-Simple Encoded size: 1344 bits
-Compression Ratio: 1.00
-
-Huffman Encoding took 21.833µs
-Huffman Encoded size: 400 bits
-Compression Ratio: 0.30
-
-BWT + Huffman Encoding took 86.125µs
-BWT + Huffman Encoded size: 415 bits
-Compression Ratio: 0.31
-
-RLE + Huffman Encoding took 20.917µs
-RLE + Huffman Encoded size: 111 bits
-Compression Ratio: 0.08
-
-BWT + RLE + Huffman Encoding took 69.375µs
-BWT + RLE + Huffman Encoded size: 171 bits
-Compression Ratio: 0.13
+BWT + RLE + Huffman Encoding took 18.125µs
+BWT + RLE + Huffman Encoded size: 10 bits
+Compression Ratio: 0.01263
 
 #####################################################
 #####################################################
