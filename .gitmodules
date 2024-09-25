@@ -1,0 +1,3 @@
+[submodule "Huffman-Visualizer/Huffman-encoding-visualizer"]
+	path = Huffman-Visualizer/Huffman-encoding-visualizer
+	url = git@github.com:ml3m/Huffman-encoding-visualizer.git
